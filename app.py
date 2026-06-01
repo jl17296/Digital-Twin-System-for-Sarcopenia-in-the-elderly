@@ -1,3 +1,20 @@
+import subprocess
+import sys
+
+# 强制在运行时安装缺失的库
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# 这里补上你需要的所有库
+required_packages = ['seaborn', 'pandas', 'numpy', 'matplotlib', 'scikit-learn']
+
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        install(package)
+
+# 下面才是你原本的代码
 import streamlit as st
 import pandas as pd
 import numpy as np
